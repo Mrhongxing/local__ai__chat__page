@@ -1,11 +1,18 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { createRouter,createWebHistory, RouterLink } from 'vue-router';
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <RouterLink class="select_router" to="/chatpage">进入聊天页面</RouterLink>
+  <router-view></router-view>
+  
 </template>
 
-<style scoped></style>
+<style scoped>
+  .select_router{
+    font-size: 20px;
+    margin-left: 20px;
+    color: blue;
+    text-decoration: underline;
+  }
+</style>
