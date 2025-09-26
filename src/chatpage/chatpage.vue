@@ -15,14 +15,40 @@
 
 <script setup lang="ts" name="chatpage">
 import { ref } from 'vue'
+import axios from 'axios';
 const messages = ref([
     { user: 'AI', text: '你好，有什么可以帮您？' }
 ])
 const input = ref('')
 function send() {
-    if (input.value.trim()) {
-        messages.value.push({ user: '你', text: input.value })
-        input.value = ''
+    const messageText = input.value.trim();
+    
+    if (messageText) {
+        // 1. 保存用户消息
+        messages.value.push({ user: '你', text: messageText });
+        
+        // 2. 清空输入框
+        input.value = '';
+        
+        // 3. 发送请求（使用保存的 messageText，不是清空后的 input.value）
+        axios.get(`http://127.0.0.1:8000/items/${encodeURIComponent(messageText)}`)
+            .then(function (response) {
+                console.log("success");
+                console.log(response.data);
+                
+                // 4. 将服务器回复添加到消息列表
+                messages.value.push({ 
+                    user: 'AI', 
+                    text: response.data.item_id
+                });
+            })
+            .catch(function (error) {
+                console.error(error);
+                messages.value.push({ 
+                    user: '系统', 
+                    text: '请求失败: ' + error.message 
+                });
+            });
     }
 }
 </script>
