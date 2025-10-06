@@ -1,6 +1,5 @@
 import { createRouter,createWebHistory } from "vue-router";
 import login from "@/component/login/login.vue";
-import chatpage from "@/component/chatpage/chatpage.vue";
 
 const routes = createRouter({
     history: createWebHistory(),
@@ -10,14 +9,23 @@ const routes = createRouter({
         redirect: '/login'
     },
     {
-        path: '/chatpage',
-        name: 'chatpage',
-        component: chatpage
-    }
-    ,{
         path: '/login',
         name: 'login',
         component: login
+    },
+    {
+        path: '/chatpage',
+        name: 'chatpage',
+        component: () => import('@/component/chatpage_page/chatpage.vue')
+    }
+    ,{
+        path: '/shopping',
+        name: 'shopping',
+        component: () => import('@/component/shopping_page/shopping.vue')
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        redirect: '/login'
     }
     ],
 })

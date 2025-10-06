@@ -40,12 +40,38 @@
         password: '',
         rememberMe: false,
     });
-    function login() {
-        if (loginForm.username === 'user' && loginForm.password === 'password') {
+    async function login() {
+
+        /*if (loginForm.username === 'user' && loginForm.password === 'password') {
             alert('登录成功！');
             router.push('/chatpage');
         } else {
             alert('用户名或密码错误，请重试。');
+        }*/
+        try {
+            const response = await fetch('http://localhost:5000/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: loginForm.username,
+                    password: loginForm.password,
+                }),
+            });
+            if (response.ok) {
+                const data = await response.json();
+                alert('登录成功！');
+                // 假设返回的数据中包含一个 token 字段
+                localStorage.setItem('token', data.token);
+                router.push('/shopping');
+            } else {
+                const errorData = await response.json();
+                alert('登录失败: ' + errorData.message);
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            alert('登录请求失败，请稍后重试。');
         }
     }
     const router = useRouter();
