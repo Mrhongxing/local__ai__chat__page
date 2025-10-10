@@ -61,11 +61,12 @@ import axios from 'axios';
                 },
             }
             );
+            console.log('Login response:', response);
             if (response.status === 200) {
                 alert('登录成功！');
                 // 假设返回的数据中包含一个 token 字段
                 localStorage.setItem('token', response.data.token);
-                router.push('/shopping');
+                router.push('/chatpage');
             } else {
                 alert('登录失败: ' + response.data.message);
             }
