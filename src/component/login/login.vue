@@ -30,6 +30,7 @@
     import { onMounted } from 'vue';
     import { useRouter } from 'vue-router';
     import {ref , reactive} from 'vue';
+import axios from 'axios';
     interface LoginForm {
         username: string;
         password: string;
@@ -40,6 +41,7 @@
         password: '',
         rememberMe: false,
     });
+    const router = useRouter();
     async function login() {
 
         /*if (loginForm.username === 'user' && loginForm.password === 'password') {
@@ -48,33 +50,30 @@
         } else {
             alert('用户名或密码错误，请重试。');
         }*/
-        try {
-            const response = await fetch('http://localhost:5000/api/login', {
-                method: 'POST',
+        try{
+            const response = await axios.post('http://localhost:5000/api/login', {
+                username: loginForm.username,
+                password: loginForm.password,
+            },
+            {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    username: loginForm.username,
-                    password: loginForm.password,
-                }),
-            });
-            if (response.ok) {
-                const data = await response.json();
+            }
+            );
+            if (response.status === 200) {
                 alert('登录成功！');
                 // 假设返回的数据中包含一个 token 字段
-                localStorage.setItem('token', data.token);
+                localStorage.setItem('token', response.data.token);
                 router.push('/shopping');
             } else {
-                const errorData = await response.json();
-                alert('登录失败: ' + errorData.message);
+                alert('登录失败: ' + response.data.message);
             }
-        } catch (error) {
+        }catch(error){
             console.error('Error during login:', error);
             alert('登录请求失败，请稍后重试。');
-        }
+        } 
     }
-    const router = useRouter();
     onMounted(() => {
         document.title = "登录 - 天枢·趣物集市";
     });
