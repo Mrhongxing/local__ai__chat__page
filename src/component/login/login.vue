@@ -61,15 +61,20 @@ import axios from 'axios';
                 },
             }
             );
+            const data = response.data
             console.log('Login response:', response);
-            if (response.status === 200) {
+            if(data.success){
+                console.log(data.message)
+                router.push('/shopping');
+            }
+            /*if (response.status === 200) {
                 alert('登录成功！');
                 // 假设返回的数据中包含一个 token 字段
                 localStorage.setItem('token', response.data.token);
                 router.push('/shopping');
             } else {
                 alert('登录失败: ' + response.data.message);
-            }
+            }*/
         }catch(error){
             console.error('Error during login:', error);
             alert('登录请求失败，请稍后重试。');
