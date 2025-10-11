@@ -58,8 +58,20 @@ function send() {
     background: #fff;
     border-radius: 8px;
     padding: 16px;
-    max-width: 600px;
-    margin: 0 auto;
+    /*max-width: 600px;
+    margin: 0 auto;*/
+    box-sizing: border-box;
+    border: rgb(255, 135, 82) solid 2px;
+    /*height: calc(100vh - 60px);
+    width: 100%;*/
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 600px;
+    height: 300px;
 }
 .messages {
     min-height: 200px;
@@ -85,7 +97,7 @@ input {
 button {
     padding: 6px 16px;
     border: none;
-    background: #409eff;
+    background: rgb(255, 185, 175);
     color: #fff;
     border-radius: 4px;
     cursor: pointer;

@@ -11,8 +11,9 @@ import { useRoute,RouterLink } from 'vue-router';
 <template>
   <div class="select_header">
     <RouterLink exact-active-class="button_shop_active" class="button_shop" to="/shopping">首页</RouterLink>
-    <RouterLink exact-active-class="button_chat_active" class="button_chat" to="/chatpage">进入聊天页面</RouterLink>
-    
+    <RouterLink exact-active-class="button_chat_active" class="button_chat" to="/search">搜索</RouterLink>
+    <RouterLink exact-active-class="button_chat_active" class="button_chat" to="/chatpage">聊天</RouterLink>
+    <RouterLink exact-active-class="button_chat_active" class="button_chat" to="/person">个人</RouterLink>
   </div>
   <div class="user">
     <div class="user_image"></div>
@@ -52,9 +53,15 @@ import { useRoute,RouterLink } from 'vue-router';
       justify-content: center;
       background-color: rgb(255, 135, 82);
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+      color: rgba(254,241,224);
+      font-weight: bold;
+      font-size: 30px;
+      text-decoration-line: none;
+      border-radius: 10px;
     }
     .button_chat_active{
-      background-color: rgb(255, 185, 175);
+      background-color: rgba(254,241,224);
+      color: rgb(255, 135, 82);
     }
     .button_shop{
       height: 100%;
@@ -64,13 +71,17 @@ import { useRoute,RouterLink } from 'vue-router';
       justify-content: center;
       background-color: rgb(255, 135, 82);
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-      
+      color: rgba(254,241,224);
+      font-weight: bold;
+      font-size: 30px;
+      text-decoration-line: none;
+      border-radius: 10px;
     }
     .button_shop_active{
-      background-color: rgb(255, 185, 175);
+      background-color: rgba(254,241,224);
+      color: rgb(255, 135, 82);
     }
-  }
-  
+  } 
   .user{
     background-color: transparent;
     position: absolute;
@@ -92,15 +103,21 @@ import { useRoute,RouterLink } from 'vue-router';
       .user_name{
         font-size: 16px;
         font-weight: bold;
-        color: white;
+        color: black;
+        cursor: pointer;
       }
       .user_id{
         font-size: 16px;
-        color: white;
+        color: black;
+        cursor: pointer;
+        font-weight: bold;
       } 
-      .botton_login{
+      .button_login{
         font-size: 16px;
-        color: white;
+        color: black;
+        cursor: pointer;
+        font-weight: bold;
+        text-decoration-line: none;
       }
     }
     .user_image{
@@ -123,6 +140,7 @@ import { useRoute,RouterLink } from 'vue-router';
     height: 100vh;
     background: #f0f0f0;
     position: absolute;
+    z-index: 1002;
     left: 0;
     top: 0;
     overflow: hidden;
